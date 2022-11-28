@@ -1,5 +1,5 @@
 package com.ahmed.carefer.remote.utilities
 
 object Constants {
-    const val baseUrl = "https://github.com/google/"
+    const val baseUrl = "https://api.football-data.org/v2/"
 }
