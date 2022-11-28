@@ -1,5 +1,7 @@
 package com.ahmed.carefer.models
 
+import java.lang.reflect.Type
+
 data class Competition(
     val area: Area? = null,
     val code: String = "",
@@ -20,7 +22,11 @@ data class Score(
     val halfTime: HalfTime,
     val penalties: Penalties,
     val winner: String
-)
+){
+    fun isWinner(type: MatchType): Boolean {
+        return winner == type.type
+    }
+}
 
 data class Referee(
     val id: Int, val name: String, val nationality: String, val role: String
@@ -35,9 +41,9 @@ data class Odds(
 )
 
 data class Matche(
-    val awayTeam: AwayTeam,
+    val awayTeam: Team,
     val group: Any,
-    val homeTeam: HomeTeam,
+    val homeTeam: Team,
     val id: Int,
     val lastUpdated: String,
     val matchday: Int,
@@ -50,7 +56,7 @@ data class Matche(
     val utcDate: String
 )
 
-data class HomeTeam(
+data class Team(
     val id: Int, val name: String
 )
 
@@ -67,10 +73,13 @@ data class ExtraTime(
     val awayTeam: Any, val homeTeam: Any
 )
 
-data class AwayTeam(
-    val id: Int, val name: String
-)
-
 data class Area(
     val id: Int, val name: String
 )
+
+enum class MatchType(val type:String){
+    Home("HOME_TEAM"),Away("AWAY_TEAM")
+}
+enum class MatchStatus(val status: String){
+    Finished("FINISHED"),Other("other")
+}

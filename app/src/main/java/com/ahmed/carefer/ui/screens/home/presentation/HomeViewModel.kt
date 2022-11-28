@@ -1,9 +1,7 @@
 package com.ahmed.carefer.ui.screens.home.presentation
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.ahmed.carefer.models.CompetitionResponse
 import com.ahmed.carefer.remote.errorhandling.IErrorCodes
 import com.ahmed.carefer.remote.utilities.Resource
 import com.ahmed.carefer.ui.screens.home.domain.usecases.GetCompetitionUserCase
@@ -46,8 +44,7 @@ class HomeViewModel @Inject constructor(
                     }
                     is Resource.Success -> _viewState.update { state ->
                         state.copy(
-                            isLoading = false,
-                            competitionResponse = results.data ?: CompetitionResponse()
+                            isLoading = false, matchesDay = results.data ?: mapOf()
                         )
                     }
                 }

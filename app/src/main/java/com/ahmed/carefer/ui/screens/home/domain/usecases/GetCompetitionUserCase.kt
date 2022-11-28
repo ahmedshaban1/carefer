@@ -3,12 +3,15 @@ package com.ahmed.carefer.ui.screens.home.domain.usecases
 import com.ahmed.carefer.remote.requester.RequestHandler
 import com.ahmed.carefer.remote.utilities.Resource
 import com.ahmed.carefer.remote.utilities.ResultWrapper
+import com.ahmed.carefer.ui.screens.home.domain.business.CompetitionBusiness
 import com.ahmed.carefer.ui.screens.home.domain.repo.CompetitionRepository
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
 class GetCompetitionUserCase @Inject constructor(
-    private val repository: CompetitionRepository, private val requestHandler: RequestHandler
+    private val repository: CompetitionRepository,
+    private val requestHandler: RequestHandler,
+    private val business: CompetitionBusiness
 ) : RequestHandler by requestHandler {
 
     suspend operator fun invoke() = flow {
@@ -20,7 +23,7 @@ class GetCompetitionUserCase @Inject constructor(
             is ResultWrapper.GenericError -> emit(Resource.Error(results.errorCode))
             is ResultWrapper.Success -> emit(
                 Resource.Success(
-                    results.value
+                    business.getMatchesByDay(results.value.matches)
                 )
             )
         }
