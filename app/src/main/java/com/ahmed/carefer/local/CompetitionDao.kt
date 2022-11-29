@@ -18,5 +18,4 @@ interface CompetitionDao {
 
     @Query("select * from  competition")
     fun getAll(): Flow<List<DayMatches>>
-
 }

@@ -21,7 +21,6 @@ class CompetitionRepositoryImpl @Inject constructor(
         return localDataSource.getCompetition()
     }
 
-
     override suspend fun changeFavorites(day: DayMatches) {
         localDataSource.changeFavorite(day)
     }

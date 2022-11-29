@@ -16,7 +16,6 @@ import com.ahmed.carefer.models.MatchType
 import com.ahmed.carefer.models.Matche
 import com.ahmed.carefer.models.Team
 
-
 @Composable
 fun TeamResultItem(
     match: Matche
@@ -40,15 +39,10 @@ fun TeamResultItem(
                         awayTeam, status, score.fullTime.awayTeam, score.isWinner(MatchType.Away)
                     )
                 }
-
             }
             if (match.status != MatchStatus.Finished.status) MatchStatus(match)
-
-
         }
     }
-
-
 }
 
 @Composable

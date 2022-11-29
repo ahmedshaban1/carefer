@@ -1,6 +1,5 @@
 package com.ahmed.carefer.ui.screens.home.presentation
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ahmed.carefer.models.DayMatches
@@ -24,7 +23,7 @@ class HomeViewModel @Inject constructor(
     private val changeFavoriteUseCase: ChangeFavoriteUseCase,
     private val repository: CompetitionRepository,
 
-    ) : ViewModel() {
+) : ViewModel() {
 
     private val _viewState = MutableStateFlow(HomeViewState())
     val viewState = _viewState.asStateFlow()
@@ -42,7 +41,8 @@ class HomeViewModel @Inject constructor(
                         state.copy(
                             errorMessage = errorCodes.getMessage(
                                 results.errorCode
-                            ), isLoading = false
+                            ),
+                            isLoading = false
                         )
                     }
                     Resource.Loading -> _viewState.update { state ->
@@ -73,5 +73,4 @@ class HomeViewModel @Inject constructor(
             }
         }
     }
-
 }

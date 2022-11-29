@@ -5,7 +5,6 @@ import com.ahmed.carefer.models.Matche
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 
-
 class MatchListConverter {
 
     @TypeConverter

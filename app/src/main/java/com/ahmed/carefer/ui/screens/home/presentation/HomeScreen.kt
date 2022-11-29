@@ -3,12 +3,9 @@
 package com.ahmed.carefer.ui.screens.home.presentation
 
 import android.annotation.SuppressLint
-import android.util.Log
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.ExperimentalMaterialApi
@@ -33,32 +30,29 @@ fun HomeScreen(viewModel: HomeViewModel = hiltViewModel()) {
     val viewState by viewModel.viewState.collectAsState()
     Scaffold(modifier = Modifier.fillMaxSize(), topBar = { CreateTopBar() }) {
         LazyColumn(
-            Modifier
-                .fillMaxSize(),
+            Modifier.fillMaxSize(),
             verticalArrangement = Arrangement.spacedBy(20.dp),
         ) {
-
-            Log.d("viewState",viewState.toString())
             if (viewState.matchesDay.isNotEmpty()) {
                 viewState.matchesDay.forEach {
-                    stickyHeader(key = it.day){
-                        DayHeader(number = it.day, isFavorite = it.isFavorite){
+                    stickyHeader(key = it.day) {
+                        DayHeader(number = it.day, isFavorite = it.isFavorite) {
                             viewModel.changeFavorite(it)
                         }
                     }
-                    items(it.matches, key = {match->
-                        match.id
-                    }) { match ->
+                    items(
+                        it.matches,
+                        key = { match ->
+                            match.id
+                        }
+                    ) { match ->
                         TeamResultItem(match)
                     }
                 }
             }
         }
     }
-
-
 }
-
 
 @Composable
 fun CreateTopBar() {

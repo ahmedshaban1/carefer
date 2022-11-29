@@ -6,7 +6,9 @@ import kotlin.random.Random
 
 @Entity(tableName = "competition")
 data class DayMatches(
-    @PrimaryKey val day: Int, var matches: List<Matche>, var isFavorite: Boolean = false
+    @PrimaryKey val day: Int,
+    var matches: List<Matche>,
+    var isFavorite: Boolean = false
 ) {
     override fun equals(other: Any?): Boolean {
         return false

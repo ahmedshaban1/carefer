@@ -1,7 +1,5 @@
 package com.ahmed.carefer.models
 
-import java.lang.reflect.Type
-
 data class Competition(
     val area: Area? = null,
     val code: String = "",
@@ -12,7 +10,10 @@ data class Competition(
 )
 
 data class Season(
-    val currentMatchday: Int, val endDate: String, val id: Int, val startDate: String
+    val currentMatchday: Int,
+    val endDate: String,
+    val id: Int,
+    val startDate: String
 )
 
 data class Score(
@@ -22,18 +23,22 @@ data class Score(
     val halfTime: HalfTime,
     val penalties: Penalties,
     val winner: String
-){
+) {
     fun isWinner(type: MatchType): Boolean {
         return winner == type.type
     }
 }
 
 data class Referee(
-    val id: Int, val name: String, val nationality: String, val role: String
+    val id: Int,
+    val name: String,
+    val nationality: String,
+    val role: String
 )
 
 data class Penalties(
-    val awayTeam: Any, val homeTeam: Any
+    val awayTeam: Any,
+    val homeTeam: Any
 )
 
 data class Odds(
@@ -57,29 +62,34 @@ data class Matche(
 )
 
 data class Team(
-    val id: Int, val name: String
+    val id: Int,
+    val name: String
 )
 
 data class HalfTime(
-    val awayTeam: Int, val homeTeam: Int
+    val awayTeam: Int,
+    val homeTeam: Int
 )
 
 data class FullTime(
-    val awayTeam: Int, val homeTeam: Int
+    val awayTeam: Int,
+    val homeTeam: Int
 )
 
 class Filters
 data class ExtraTime(
-    val awayTeam: Any, val homeTeam: Any
+    val awayTeam: Any,
+    val homeTeam: Any
 )
 
 data class Area(
-    val id: Int, val name: String
+    val id: Int,
+    val name: String
 )
 
-enum class MatchType(val type:String){
-    Home("HOME_TEAM"),Away("AWAY_TEAM")
+enum class MatchType(val type: String) {
+    Home("HOME_TEAM"), Away("AWAY_TEAM")
 }
-enum class MatchStatus(val status: String){
-    Finished("FINISHED"),Other("other")
+enum class MatchStatus(val status: String) {
+    Finished("FINISHED")
 }

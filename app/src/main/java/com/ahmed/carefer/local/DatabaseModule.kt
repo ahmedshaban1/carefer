@@ -18,5 +18,4 @@ object DatabaseModule {
             app, AppDatabase::class.java, "app_db"
         ).build()
     }
-
 }

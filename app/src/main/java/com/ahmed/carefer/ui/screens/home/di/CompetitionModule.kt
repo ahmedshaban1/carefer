@@ -32,12 +32,12 @@ object CompetitionModule {
     @Singleton
     @Provides
     fun providesCompetitionRepository(
-        remoteDataSource: CompetitionRemoteDataSource, localDataSource: CompetitionLocalDataSource
+        remoteDataSource: CompetitionRemoteDataSource,
+        localDataSource: CompetitionLocalDataSource
     ): CompetitionRepository = CompetitionRepositoryImpl(remoteDataSource, localDataSource)
 
     @Singleton
     @Provides
     fun CompetitionApi(retrofit: Retrofit): CompetitionApi =
         retrofit.create(CompetitionApi::class.java)
-
 }
