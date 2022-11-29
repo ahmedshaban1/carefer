@@ -22,9 +22,9 @@ class GetCompetitionUserCase @Inject constructor(
         when (results) {
             is ResultWrapper.GenericError -> emit(Resource.Error(results.errorCode))
             is ResultWrapper.Success -> emit(
-                Resource.Success(
-                    business.getMatchesByDay(results.value.matches)
-                )
+                Resource.Success(business.getMatchesByDay(results.value.matches).apply {
+                    repository.saveCompetition(this.toList())
+                })
             )
         }
     }

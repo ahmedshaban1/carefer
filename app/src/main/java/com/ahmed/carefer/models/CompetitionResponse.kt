@@ -4,5 +4,5 @@ data class CompetitionResponse(
     val competition: Competition = Competition(),
     val count: Int = 0,
     val filters: Filters = Filters(),
-    val matches: List<Matche> = listOf()
+    val matches: MutableList<Matche> = mutableListOf()
 )

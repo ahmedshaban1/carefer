@@ -1,6 +1,5 @@
 package com.ahmed.carefer.ui.screens.home.presentation.components
 
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
@@ -20,13 +19,11 @@ import com.ahmed.carefer.models.Team
 
 @Composable
 fun TeamResultItem(
-    match: Matche, onItemClicked: (Matche) -> Unit
+    match: Matche
 ) {
-    Card(modifier = Modifier
-        .fillMaxWidth()
-        .clickable {
-            onItemClicked(match)
-        }) {
+    Card(
+        modifier = Modifier.fillMaxWidth().padding(10.dp)
+    ) {
         Column(
             modifier = Modifier
                 .fillMaxWidth()

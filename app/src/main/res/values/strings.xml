@@ -3,4 +3,5 @@
     <string name="title_activity_main">MainActivity</string>
     <string name="no_data_found">No data found</string>
     <string name="generic_error">Something went wrong try again later</string>
+    <string name="day_number">Day Number #%d</string>
 </resources>

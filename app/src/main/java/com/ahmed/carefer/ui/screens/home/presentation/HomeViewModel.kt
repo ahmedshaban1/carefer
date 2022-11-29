@@ -1,9 +1,13 @@
 package com.ahmed.carefer.ui.screens.home.presentation
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.ahmed.carefer.models.DayMatches
 import com.ahmed.carefer.remote.errorhandling.IErrorCodes
 import com.ahmed.carefer.remote.utilities.Resource
+import com.ahmed.carefer.ui.screens.home.domain.repo.CompetitionRepository
+import com.ahmed.carefer.ui.screens.home.domain.usecases.ChangeFavoriteUseCase
 import com.ahmed.carefer.ui.screens.home.domain.usecases.GetCompetitionUserCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -17,13 +21,17 @@ import javax.inject.Inject
 class HomeViewModel @Inject constructor(
     private val errorCodes: IErrorCodes,
     private val getCompetitionUserCase: GetCompetitionUserCase,
-) : ViewModel() {
+    private val changeFavoriteUseCase: ChangeFavoriteUseCase,
+    private val repository: CompetitionRepository,
+
+    ) : ViewModel() {
 
     private val _viewState = MutableStateFlow(HomeViewState())
     val viewState = _viewState.asStateFlow()
 
     init {
         getHome()
+        observerLocalHome()
     }
 
     private fun getHome() {
@@ -44,10 +52,24 @@ class HomeViewModel @Inject constructor(
                     }
                     is Resource.Success -> _viewState.update { state ->
                         state.copy(
-                            isLoading = false, matchesDay = results.data ?: mapOf()
+                            isLoading = false
                         )
                     }
                 }
+            }
+        }
+    }
+
+    fun changeFavorite(dayMatches: DayMatches) {
+        viewModelScope.launch {
+            changeFavoriteUseCase(dayMatches)
+        }
+    }
+
+    private fun observerLocalHome() {
+        viewModelScope.launch {
+            repository.getLocalCompetition().collectLatest { list ->
+                _viewState.update { it.copy(matchesDay = list.toMutableList()) }
             }
         }
     }
