@@ -24,7 +24,7 @@ class ListContentViewModel @Inject constructor(
     private val changeFavoriteUseCase: ChangeFavoriteUseCase,
     private val repository: CompetitionRepository,
 
-) : ViewModel() {
+    ) : ViewModel() {
 
     private val _viewState = MutableStateFlow(ListContentViewState())
     val viewState = _viewState.asStateFlow()
@@ -42,8 +42,7 @@ class ListContentViewModel @Inject constructor(
                         state.copy(
                             errorMessage = errorCodes.getMessage(
                                 results.errorCode
-                            ),
-                            isLoading = false
+                            ), isLoading = false
                         )
                     }
                     Resource.Loading -> _viewState.update { state ->
@@ -53,7 +52,7 @@ class ListContentViewModel @Inject constructor(
                     }
                     is Resource.Success -> _viewState.update { state ->
                         state.copy(
-                            isLoading = false
+                            isLoading = false,
                         )
                     }
                 }
@@ -70,7 +69,12 @@ class ListContentViewModel @Inject constructor(
     private fun getLocalHome(filter: Filter = Filter.ALL) {
         viewModelScope.launch {
             repository.getLocalCompetition(filter).collectLatest { list ->
-                _viewState.update { it.copy(matchesDay = list.toMutableList()) }
+                _viewState.update {
+                    it.copy(
+                        matchesDay = list.toMutableList(),
+                        isEmpty = list.isEmpty()
+                    )
+                }
             }
         }
     }

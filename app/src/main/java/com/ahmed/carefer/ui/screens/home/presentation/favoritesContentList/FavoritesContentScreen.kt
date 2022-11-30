@@ -13,19 +13,15 @@ import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.ahmed.carefer.R
 import com.ahmed.carefer.ui.screens.home.presentation.components.MatchesList
+import com.ahmed.carefer.ui.screens.shared_components.EmptyState
 
 @Composable
 fun FavoritesContentScreen(viewModel: FavoritesViewModel = hiltViewModel()) {
     val viewState by viewModel.viewState.collectAsState()
-    if (viewState.matchesDay.isEmpty()) FavoritesEmptyState()
+    if (viewState.matchesDay.isEmpty()) EmptyState(stringResource(id = R.string.no_favorites))
     MatchesList(matchesDay = viewState.matchesDay) {
         viewModel.changeFavorite(it)
     }
 }
 
-@Composable
-fun FavoritesEmptyState() {
-    Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-        Text(text = stringResource(R.string.no_favorites), style = MaterialTheme.typography.h5)
-    }
-}
+
