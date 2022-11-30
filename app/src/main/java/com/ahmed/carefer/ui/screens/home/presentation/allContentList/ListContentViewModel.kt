@@ -1,4 +1,4 @@
-package com.ahmed.carefer.ui.screens.home.presentation
+package com.ahmed.carefer.ui.screens.home.presentation.allContentList
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -8,6 +8,7 @@ import com.ahmed.carefer.remote.utilities.Resource
 import com.ahmed.carefer.ui.screens.home.domain.repo.CompetitionRepository
 import com.ahmed.carefer.ui.screens.home.domain.usecases.ChangeFavoriteUseCase
 import com.ahmed.carefer.ui.screens.home.domain.usecases.GetCompetitionUserCase
+import com.ahmed.carefer.ui.screens.home.presentation.Filter
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -17,19 +18,20 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class HomeViewModel @Inject constructor(
+class ListContentViewModel @Inject constructor(
     private val errorCodes: IErrorCodes,
     private val getCompetitionUserCase: GetCompetitionUserCase,
     private val changeFavoriteUseCase: ChangeFavoriteUseCase,
     private val repository: CompetitionRepository,
 
-) : ViewModel() {
+    ) : ViewModel() {
 
-    private val _viewState = MutableStateFlow(HomeViewState())
+    private val _viewState = MutableStateFlow(ListContentViewState())
     val viewState = _viewState.asStateFlow()
 
     init {
         getHome()
+        getLocalHome()
     }
 
     private fun getHome() {
@@ -40,8 +42,7 @@ class HomeViewModel @Inject constructor(
                         state.copy(
                             errorMessage = errorCodes.getMessage(
                                 results.errorCode
-                            ),
-                            isLoading = false
+                            ), isLoading = false
                         )
                     }
                     Resource.Loading -> _viewState.update { state ->
@@ -65,7 +66,7 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    fun getLocalHome(filter: Filter = Filter.ALL) {
+    private fun getLocalHome(filter: Filter = Filter.ALL) {
         viewModelScope.launch {
             repository.getLocalCompetition(filter).collectLatest { list ->
                 _viewState.update { it.copy(matchesDay = list.toMutableList()) }

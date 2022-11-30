@@ -8,19 +8,18 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
-import androidx.compose.material.*
-import androidx.compose.runtime.*
+import androidx.compose.material.Scaffold
+import androidx.compose.material.Text
+import androidx.compose.material.TopAppBar
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
 import com.ahmed.carefer.R
-import com.ahmed.carefer.ui.screens.home.presentation.components.DayHeader
+import com.ahmed.carefer.ui.screens.home.presentation.allContentList.AllListContentScreen
 import com.ahmed.carefer.ui.screens.home.presentation.components.Tabs
-import com.ahmed.carefer.ui.screens.home.presentation.components.TeamResultItem
+import com.ahmed.carefer.ui.screens.home.presentation.favoritesContentList.FavoritesContentScreen
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.rememberPagerState
@@ -54,10 +53,10 @@ fun HomeScreen() {
                 Column(
                     modifier = Modifier.fillMaxSize(), verticalArrangement = Arrangement.Center, horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    if (index == 0){
-                        ListContent(filter = Filter.ALL)
-                    }else {
-                        ListContent(filter = Filter.Favorites)
+                    if (index == 0) {
+                        AllListContentScreen()
+                    } else {
+                        FavoritesContentScreen()
                     }
                 }
             }
@@ -67,33 +66,6 @@ fun HomeScreen() {
     }
 }
 
-
-@Composable
-fun ListContent(viewModel: HomeViewModel = hiltViewModel(),filter: Filter) {
-    val viewState by viewModel.viewState.collectAsState()
-    LaunchedEffect(key1 = true){
-        viewModel.getLocalHome(filter)
-    }
-    LazyColumn(
-        Modifier.fillMaxSize(),
-        verticalArrangement = Arrangement.spacedBy(20.dp),
-    ) {
-        if (viewState.matchesDay.isNotEmpty()) {
-            viewState.matchesDay.forEach {
-                stickyHeader(key = it.day) {
-                    DayHeader(number = it.day, isFavorite = it.isFavorite) {
-                        viewModel.changeFavorite(it)
-                    }
-                }
-                items(it.matches, key = { match ->
-                    match.id
-                }) { match ->
-                    TeamResultItem(match)
-                }
-            }
-        }
-    }
-}
 
 @Composable
 fun CreateTopBar() {
