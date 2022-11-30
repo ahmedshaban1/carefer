@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
+import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
@@ -29,19 +30,22 @@ import kotlinx.coroutines.launch
 @OptIn(ExperimentalPagerApi::class)
 @Composable
 fun HomeScreen() {
-
-    Scaffold(modifier = Modifier.fillMaxSize(), topBar = { CreateTopBar() }) {
+    val scaffoldState = rememberScaffoldState()
+    val scope = rememberCoroutineScope()
+    Scaffold(
+        modifier = Modifier.fillMaxSize(),
+        topBar = { CreateTopBar() },
+        scaffoldState = scaffoldState
+    ) {
         val pagerState = rememberPagerState(
             pageCount = 2,
             initialOffscreenLimit = 2,
             infiniteLoop = true,
             initialPage = 0,
         )
-        val coroutineScope = rememberCoroutineScope()
-
         Column(Modifier.fillMaxWidth()) {
             Tabs { index ->
-                coroutineScope.launch {
+                scope.launch {
                     pagerState.animateScrollToPage(index)
                 }
             }
@@ -53,7 +57,7 @@ fun HomeScreen() {
                     modifier = Modifier.fillMaxSize(), verticalArrangement = Arrangement.Center, horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     if (index == 0) {
-                        AllListContentScreen()
+                        AllListContentScreen(scaffoldState = scaffoldState)
                     } else {
                         FavoritesContentScreen()
                     }

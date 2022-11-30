@@ -1,5 +1,6 @@
 package com.ahmed.carefer.ui.screens.home.presentation.allContentList
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ahmed.carefer.models.DayMatches
@@ -29,6 +30,7 @@ class ListContentViewModel @Inject constructor(
     private val _viewState = MutableStateFlow(ListContentViewState())
     val viewState = _viewState.asStateFlow()
 
+
     init {
         getHome()
         getLocalHome()
@@ -38,21 +40,25 @@ class ListContentViewModel @Inject constructor(
         viewModelScope.launch {
             getCompetitionUserCase().collectLatest { results ->
                 when (results) {
-                    is Resource.Error -> _viewState.update { state ->
-                        state.copy(
-                            errorMessage = errorCodes.getMessage(
-                                results.errorCode
-                            ), isLoading = false
-                        )
+                    is Resource.Error -> {
+                        Log.e("errror", "ssssssss")
+                        _viewState.update { state ->
+                            state.copy(
+                                isLoading = false, errorMessage = errorCodes.getMessage(
+                                    results.errorCode
+                                )
+                            )
+
+                        }
                     }
                     Resource.Loading -> _viewState.update { state ->
                         state.copy(
-                            isLoading = true
+                            isLoading = true, errorMessage = ""
                         )
                     }
                     is Resource.Success -> _viewState.update { state ->
                         state.copy(
-                            isLoading = false,
+                            isLoading = false, errorMessage = ""
                         )
                     }
                 }
@@ -72,10 +78,16 @@ class ListContentViewModel @Inject constructor(
                 _viewState.update {
                     it.copy(
                         matchesDay = list.toMutableList(),
-                        isEmpty = list.isEmpty()
+                        isEmpty = list.isEmpty(),
                     )
                 }
             }
+        }
+    }
+
+    fun removeErrorMessage() {
+        _viewState.update {
+            it.copy(errorMessage = "")
         }
     }
 }
