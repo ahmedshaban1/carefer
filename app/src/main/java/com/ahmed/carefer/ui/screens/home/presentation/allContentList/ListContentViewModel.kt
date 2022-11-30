@@ -25,11 +25,10 @@ class ListContentViewModel @Inject constructor(
     private val changeFavoriteUseCase: ChangeFavoriteUseCase,
     private val repository: CompetitionRepository,
 
-    ) : ViewModel() {
+) : ViewModel() {
 
     private val _viewState = MutableStateFlow(ListContentViewState())
     val viewState = _viewState.asStateFlow()
-
 
     init {
         getHome()
@@ -44,11 +43,11 @@ class ListContentViewModel @Inject constructor(
                         Log.e("errror", "ssssssss")
                         _viewState.update { state ->
                             state.copy(
-                                isLoading = false, errorMessage = errorCodes.getMessage(
+                                isLoading = false,
+                                errorMessage = errorCodes.getMessage(
                                     results.errorCode
                                 )
                             )
-
                         }
                     }
                     Resource.Loading -> _viewState.update { state ->

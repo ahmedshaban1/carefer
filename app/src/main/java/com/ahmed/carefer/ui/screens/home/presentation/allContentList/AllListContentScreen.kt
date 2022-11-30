@@ -14,7 +14,8 @@ import com.ahmed.carefer.ui.screens.shared_components.LoadingDialog
 
 @Composable
 fun AllListContentScreen(
-    viewModel: ListContentViewModel = hiltViewModel(), scaffoldState: ScaffoldState
+    viewModel: ListContentViewModel = hiltViewModel(),
+    scaffoldState: ScaffoldState
 ) {
     val viewState by viewModel.viewState.collectAsState()
     if (viewState.isLoading) LoadingDialog()

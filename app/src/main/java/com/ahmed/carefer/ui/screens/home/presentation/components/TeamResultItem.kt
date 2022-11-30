@@ -28,7 +28,8 @@ fun TeamResultItem(
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(16.dp), horizontalAlignment = Alignment.CenterHorizontally
+                .padding(16.dp),
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
             TeamsNames(match)
             if (match.status == MatchStatus.Finished.status) {
@@ -48,7 +49,6 @@ fun TeamsNames(match: Matche) {
         Box(modifier = Modifier.weight(1f), contentAlignment = Alignment.Center) {
             TeamName(match.awayTeam)
         }
-
     }
 }
 
@@ -59,7 +59,6 @@ fun TeamsScore(match: Matche) {
         Score(match.score.fullTime.awayTeam, match.score.isWinner(MatchType.Away))
     }
 }
-
 
 @Composable
 fun TeamName(team: Team) {
