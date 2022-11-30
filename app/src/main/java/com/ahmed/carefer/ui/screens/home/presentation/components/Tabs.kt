@@ -8,25 +8,29 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import com.ahmed.carefer.R
 
-sealed class Tabs(val tabName: Int, val selected: Boolean) {
-    object All : Tabs(R.string.all_list, false)
-    object Favorites : Tabs(R.string.favorites, false)
+sealed class Tabs(val tabName: Int) {
+    object All : Tabs(R.string.all_list)
+    object Favorites : Tabs(R.string.favorites)
 }
 
 val tabItems = listOf(Tabs.All, Tabs.Favorites)
-
 
 @Composable
 fun Tabs(onTabChanged: (Int) -> Unit) {
     var selectedTab by remember { mutableStateOf(0) }
     TabRow(selectedTabIndex = selectedTab) {
         tabItems.forEachIndexed { index, it ->
-            Tab(selected = selectedTab == index, onClick = {
-                selectedTab = index
-                onTabChanged(selectedTab)
-            }, text = {
-                Text(text = stringResource(id = it.tabName))
-            }, selectedContentColor = Color.Magenta, unselectedContentColor = Color.White)
+            Tab(
+                selected = selectedTab == index,
+                onClick = {
+                    selectedTab = index
+                    onTabChanged(selectedTab)
+                },
+                text = {
+                    Text(text = stringResource(id = it.tabName))
+                },
+                selectedContentColor = Color.Magenta, unselectedContentColor = Color.White
+            )
         }
     }
 }

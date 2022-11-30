@@ -37,7 +37,6 @@ fun HomeScreen() {
             infiniteLoop = true,
             initialPage = 0,
         )
-        val tabIndex = pagerState.currentPage
         val coroutineScope = rememberCoroutineScope()
 
         Column(Modifier.fillMaxWidth()) {
@@ -60,12 +59,9 @@ fun HomeScreen() {
                     }
                 }
             }
-
         }
-
     }
 }
-
 
 @Composable
 fun CreateTopBar() {

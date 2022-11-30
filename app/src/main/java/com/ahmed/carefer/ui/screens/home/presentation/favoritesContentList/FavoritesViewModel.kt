@@ -14,13 +14,12 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-
 @HiltViewModel
 class FavoritesViewModel @Inject constructor(
     private val changeFavoriteUseCase: ChangeFavoriteUseCase,
     private val repository: CompetitionRepository,
 
-    ) : ViewModel() {
+) : ViewModel() {
 
     private val _viewState = MutableStateFlow(FavoritesViewState())
     val viewState = _viewState.asStateFlow()
@@ -42,5 +41,4 @@ class FavoritesViewModel @Inject constructor(
             }
         }
     }
-
 }

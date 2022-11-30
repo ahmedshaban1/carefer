@@ -25,13 +25,15 @@ fun MatchesList(matchesDay: List<DayMatches>, onFavoriteClicked: (DayMatches) ->
                         onFavoriteClicked(it)
                     }
                 }
-                items(it.matches, key = { match ->
-                    match.id
-                }) { match ->
+                items(
+                    it.matches,
+                    key = { match ->
+                        match.id
+                    }
+                ) { match ->
                     TeamResultItem(match)
                 }
             }
         }
     }
-
 }

@@ -1,9 +1,11 @@
 <resources>
-    <string name="app_name">Carefer</string>
+    <string name="app_name">Premier league</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="no_data_found">No data found</string>
     <string name="generic_error">Something went wrong try again later</string>
     <string name="day_number">Day Number #%d</string>
     <string name="all_list">All</string>
     <string name="favorites">Favorites</string>
+    <string name="api_key">15ce0f9561584c7db17f27851883bccc</string>
+    <string name="no_favorites">You don\'t have any favorite items</string>
 </resources>
