@@ -21,24 +21,18 @@ fun TeamResultItem(
     match: Matche
 ) {
     Card(
-        modifier = Modifier.fillMaxWidth().padding(10.dp)
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(10.dp)
     ) {
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(16.dp),
-            horizontalAlignment = Alignment.CenterHorizontally
+                .padding(16.dp), horizontalAlignment = Alignment.CenterHorizontally
         ) {
-
-            Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceAround) {
-                with(match) {
-                    Team(
-                        homeTeam, status, score.fullTime.homeTeam, score.isWinner(MatchType.Home)
-                    )
-                    Team(
-                        awayTeam, status, score.fullTime.awayTeam, score.isWinner(MatchType.Away)
-                    )
-                }
+            TeamsNames(match)
+            if (match.status == MatchStatus.Finished.status) {
+                TeamsScore(match)
             }
             if (match.status != MatchStatus.Finished.status) MatchStatus(match)
         }
@@ -46,26 +40,38 @@ fun TeamResultItem(
 }
 
 @Composable
-fun Team(team: Team, status: String, score: Int, isWinner: Boolean) {
-    Column(horizontalAlignment = Alignment.CenterHorizontally) {
-        TeamName(team = team)
-        if (status == MatchStatus.Finished.status) {
-            Score(score, isWinner)
+fun TeamsNames(match: Matche) {
+    Row(Modifier.fillMaxWidth()) {
+        Box(modifier = Modifier.weight(1f), contentAlignment = Alignment.Center) {
+            TeamName(match.homeTeam)
         }
+        Box(modifier = Modifier.weight(1f), contentAlignment = Alignment.Center) {
+            TeamName(match.awayTeam)
+        }
+
     }
 }
 
 @Composable
+fun TeamsScore(match: Matche) {
+    Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceAround) {
+        Score(match.score.fullTime.homeTeam, match.score.isWinner(MatchType.Home))
+        Score(match.score.fullTime.awayTeam, match.score.isWinner(MatchType.Away))
+    }
+}
+
+
+@Composable
 fun TeamName(team: Team) {
-    Text(text = team.name, style = MaterialTheme.typography.subtitle2)
+    Text(
+        text = team.name, style = MaterialTheme.typography.subtitle2, textAlign = TextAlign.Center
+    )
 }
 
 @Composable
 fun Score(results: Int, isWinner: Boolean) {
     Text(
-        text = results.toString(),
-        textAlign = TextAlign.Center,
-        color = if (isWinner) Color.Green else Color.Black
+        text = results.toString(), textAlign = TextAlign.Center, color = if (isWinner) Color.Green else Color.Black
     )
 }
 
