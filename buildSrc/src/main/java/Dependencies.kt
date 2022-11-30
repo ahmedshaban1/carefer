@@ -47,6 +47,7 @@ object Deps {
     val httpLogger by lazy { "com.squareup.okhttp3:logging-interceptor:${Versions.okHttp}" }
     val constraintLayoutCompose by lazy { "androidx.constraintlayout:constraintlayout-compose:${Versions.constraintLayoutCompose}" }
     val coil by  lazy { "io.coil-kt:coil-compose:${Versions.coil}" }
+    val pager by lazy { "com.google.accompanist:accompanist-pager:${Versions.pager}" }
 
 
 }

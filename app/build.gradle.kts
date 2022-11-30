@@ -29,8 +29,7 @@ android {
         getByName("release") {
             isMinifyEnabled = false
             proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
+                getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
             )
         }
     }
@@ -81,6 +80,7 @@ dependencies {
     implementation(Deps.retrofitScalarsAdapter)
     implementation(Deps.constraintLayoutCompose)
     implementation(Deps.coil)
+    implementation(Deps.pager)
 
     testImplementation(Deps.testJunit)
     testImplementation(Deps.mockk)

@@ -30,7 +30,6 @@ class HomeViewModel @Inject constructor(
 
     init {
         getHome()
-        observerLocalHome()
     }
 
     private fun getHome() {
@@ -66,9 +65,9 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    private fun observerLocalHome() {
+    fun getLocalHome(filter: Filter = Filter.ALL) {
         viewModelScope.launch {
-            repository.getLocalCompetition().collectLatest { list ->
+            repository.getLocalCompetition(filter).collectLatest { list ->
                 _viewState.update { it.copy(matchesDay = list.toMutableList()) }
             }
         }

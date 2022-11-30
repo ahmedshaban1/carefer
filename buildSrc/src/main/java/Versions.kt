@@ -25,4 +25,5 @@ object Versions {
     const val constraintLayoutCompose = "1.0.1"
     const val coil = "2.2.0"
     const val material_three = "1.1.0-alpha02"
+    const val pager = "0.12.0"
 }

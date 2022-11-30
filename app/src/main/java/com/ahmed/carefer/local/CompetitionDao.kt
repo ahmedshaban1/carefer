@@ -18,4 +18,7 @@ interface CompetitionDao {
 
     @Query("select * from  competition")
     fun getAll(): Flow<List<DayMatches>>
+
+    @Query("select * from  competition where isFavorite=1")
+    fun getFavorites(): Flow<List<DayMatches>>
 }

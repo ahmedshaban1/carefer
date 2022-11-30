@@ -5,6 +5,7 @@ import com.ahmed.carefer.models.DayMatches
 import com.ahmed.carefer.ui.screens.home.data.local.CompetitionLocalDataSource
 import com.ahmed.carefer.ui.screens.home.data.remote.CompetitionRemoteDataSource
 import com.ahmed.carefer.ui.screens.home.domain.repo.CompetitionRepository
+import com.ahmed.carefer.ui.screens.home.presentation.Filter
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
@@ -17,8 +18,8 @@ class CompetitionRepositoryImpl @Inject constructor(
         return remote.getCompetition()
     }
 
-    override suspend fun getLocalCompetition(): Flow<List<DayMatches>> {
-        return localDataSource.getCompetition()
+    override suspend fun getLocalCompetition(filter: Filter): Flow<List<DayMatches>> {
+        return localDataSource.getCompetition(filter)
     }
 
     override suspend fun changeFavorites(day: DayMatches) {

@@ -4,4 +4,6 @@
     <string name="no_data_found">No data found</string>
     <string name="generic_error">Something went wrong try again later</string>
     <string name="day_number">Day Number #%d</string>
+    <string name="all_list">All</string>
+    <string name="favorites">Favorites</string>
 </resources>
