@@ -25,7 +25,7 @@ Pl Assignment app is a small   application to demonstrate modern Android applica
 - [Mockk](https://mockk.io/) for unit testing
 
 - Architecture
-  - MVVM Architecture
+  - MVI Architecture
   - Repository pattern
   - Clean Architecture approach.
 - [Gradle KotlinDsl](https://docs.gradle.org/current/userguide/kotlin_dsl.html)
