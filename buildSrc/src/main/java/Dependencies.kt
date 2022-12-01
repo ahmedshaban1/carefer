@@ -38,16 +38,16 @@ object Deps {
     val daggerCompiler by lazy { "com.google.dagger:hilt-compiler:${Versions.daggerHilt}" }
     val roomRunTime by lazy { "androidx.room:room-runtime:${Versions.room}" }
     val roomCompiler by lazy { "androidx.room:room-compiler:${Versions.room}" }
-    var roomExtension = "androidx.room:room-ktx:${Versions.room}"
+    val roomExtension by lazy { "androidx.room:room-ktx:${Versions.room}" }
     val retrofitCoroutinesAdapter by lazy { "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:${Versions.retrofitCoroutines}" }
+    val coroutinesTesting by lazy { "org.jetbrains.kotlinx:kotlinx-coroutines-test:${Versions.coroutinesTesting}" }
     val gson by lazy { "com.google.code.gson:gson:${Versions.gson}" }
     val retrofit by lazy { "com.squareup.retrofit2:retrofit:${Versions.retrofit}" }
     val retrofitGsonAdapter by lazy { "com.squareup.retrofit2:converter-gson:${Versions.retrofitGson}" }
-    val retrofitScalarsAdapter by lazy { "com.squareup.retrofit2:converter-scalars:${Versions.scalarsAdapter}" }
     val httpLogger by lazy { "com.squareup.okhttp3:logging-interceptor:${Versions.okHttp}" }
-    val constraintLayoutCompose by lazy { "androidx.constraintlayout:constraintlayout-compose:${Versions.constraintLayoutCompose}" }
-    val coil by  lazy { "io.coil-kt:coil-compose:${Versions.coil}" }
     val pager by lazy { "com.google.accompanist:accompanist-pager:${Versions.pager}" }
+    val coreTesting:String by lazy { "androidx.arch.core:core-testing:${Versions.coreTesting}" }
+
 
 
 }

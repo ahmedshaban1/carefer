@@ -40,7 +40,6 @@ class ListContentViewModel @Inject constructor(
             getCompetitionUserCase().collectLatest { results ->
                 when (results) {
                     is Resource.Error -> {
-                        Log.e("errror", "ssssssss")
                         _viewState.update { state ->
                             state.copy(
                                 isLoading = false,

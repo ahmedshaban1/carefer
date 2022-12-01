@@ -17,7 +17,6 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.converter.scalars.ScalarsConverterFactory
 import javax.inject.Singleton
 
 @InstallIn(SingletonComponent::class)
@@ -27,14 +26,17 @@ object RemoteModule {
     @Provides
     fun providesRetrofit(okHttpClient: OkHttpClient): Retrofit {
         val gson = GsonBuilder().setLenient().create()
-        return Retrofit.Builder().client(okHttpClient).baseUrl(baseUrl).addConverterFactory(ScalarsConverterFactory.create()).addConverterFactory(GsonConverterFactory.create(gson)).build()
+        return Retrofit.Builder()
+            .client(okHttpClient)
+            .baseUrl(baseUrl)
+            .addConverterFactory(GsonConverterFactory.create(gson))
+            .build()
     }
 
     @Singleton
     @Provides
     fun providesClient(
-        logger: Interceptor,
-        defaultInterceptor: DefaultInterceptor
+        logger: Interceptor, defaultInterceptor: DefaultInterceptor
     ): OkHttpClient {
         return OkHttpClient
             .Builder()
@@ -46,7 +48,13 @@ object RemoteModule {
     @Provides
     @Singleton
     fun provideLoggingInterceptor(): Interceptor {
-        return HttpLoggingInterceptor().setLevel(if (BuildConfig.DEBUG) HttpLoggingInterceptor.Level.BODY else HttpLoggingInterceptor.Level.NONE)
+        return HttpLoggingInterceptor()
+            .setLevel(
+                if (BuildConfig.DEBUG)
+                    HttpLoggingInterceptor.Level.BODY
+                else
+                    HttpLoggingInterceptor.Level.NONE
+            )
     }
 
     @Provides

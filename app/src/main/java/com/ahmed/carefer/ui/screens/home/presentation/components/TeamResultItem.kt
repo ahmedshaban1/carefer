@@ -23,7 +23,7 @@ fun TeamResultItem(
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(10.dp)
+            .padding(5.dp)
     ) {
         Column(
             modifier = Modifier
