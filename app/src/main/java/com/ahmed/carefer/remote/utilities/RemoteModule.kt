@@ -36,7 +36,8 @@ object RemoteModule {
     @Singleton
     @Provides
     fun providesClient(
-        logger: Interceptor, defaultInterceptor: DefaultInterceptor
+        logger: Interceptor,
+        defaultInterceptor: DefaultInterceptor
     ): OkHttpClient {
         return OkHttpClient
             .Builder()

@@ -38,7 +38,6 @@ class GetCompetitionUserCaseTest {
     private val competitionBusiness = mockk<CompetitionBusiness>()
     private var results: MutableList<Resource<List<DayMatches>>> = mutableListOf()
 
-
     @Before
     fun setUp() {
         sut = GetCompetitionUserCase(competitionRepository, requestHandler, competitionBusiness)
@@ -72,7 +71,6 @@ class GetCompetitionUserCaseTest {
         assertEquals(Resource.Loading, results[0])
         assertTrue(results[1] is Resource.Success)
         assertEquals(dayMatches.size, (results[1] as Resource.Success).data!!.size)
-
     }
 
     @Test
@@ -82,8 +80,8 @@ class GetCompetitionUserCaseTest {
             requestHandler.makeApiRequest {
                 competitionRepository.getCompetition()
             }
-        } throws  Throwable()
-        coEvery { competitionRepository.getCompetition() } throws  Throwable()
+        } throws Throwable()
+        coEvery { competitionRepository.getCompetition() } throws Throwable()
 
         // act
 
@@ -99,7 +97,5 @@ class GetCompetitionUserCaseTest {
         assertEquals(Resource.Loading, results[0])
         assertTrue(results[1] is Resource.Error)
         assertEquals(ErrorCodes.GENERIC_ERROR, (results[1] as Resource.Error).errorCode)
-
     }
 }
-

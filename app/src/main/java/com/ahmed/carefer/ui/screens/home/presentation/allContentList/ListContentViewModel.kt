@@ -1,6 +1,5 @@
 package com.ahmed.carefer.ui.screens.home.presentation.allContentList
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ahmed.carefer.models.DayMatches

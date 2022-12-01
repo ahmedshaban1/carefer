@@ -30,5 +30,4 @@ object FakeData {
     val dayMatches: MutableList<DayMatches> = mutableListOf<DayMatches>().apply {
         add(DayMatches(1, matchesList))
     }
-
 }
