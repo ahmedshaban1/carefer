@@ -19,14 +19,29 @@ class CompetitionRepositoryImpl @Inject constructor(
     }
 
     override suspend fun getLocalCompetition(filter: Filter): Flow<List<DayMatches>> {
-        return localDataSource.getCompetition(filter)
+        return when (filter) {
+            Filter.ALL -> localDataSource.getAll()
+            Filter.Favorites -> localDataSource.getFavorites()
+        }
     }
 
     override suspend fun changeFavorites(day: DayMatches) {
-        localDataSource.changeFavorite(day)
+        localDataSource.updateDayMatch(day)
     }
 
     override suspend fun saveCompetition(dayMatches: List<DayMatches>) {
-        localDataSource.insertAllDays(dayMatches)
+        dayMatches.forEach { dayMatch ->
+            localDataSource.getDay(dayMatch.day)?.let {
+                // update
+                localDataSource.updateDayMatch(
+                    it.apply {
+                        matches = dayMatch.matches
+                    }
+                )
+            } ?: kotlin.run {
+                // insert
+                localDataSource.insertDayMatch(dayMatch)
+            }
+        }
     }
 }

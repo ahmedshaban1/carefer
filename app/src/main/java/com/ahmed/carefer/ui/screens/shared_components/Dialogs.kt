@@ -9,7 +9,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.window.Dialog
 
 @Composable
-fun LoadingDialog(){
+fun LoadingDialog() {
     Dialog(onDismissRequest = {}) {
         Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
             CircularProgressIndicator()

@@ -6,5 +6,5 @@ data class ListContentViewState(
     val errorMessage: String = "",
     val isLoading: Boolean = false,
     val matchesDay: MutableList<DayMatches> = mutableListOf(),
-    val isEmpty:Boolean = false
+    val isEmpty: Boolean = false
 )

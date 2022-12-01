@@ -6,6 +6,10 @@ import javax.inject.Inject
 
 class ChangeFavoriteUseCase @Inject constructor(private val repository: CompetitionRepository) {
     suspend operator fun invoke(day: DayMatches) {
-        repository.changeFavorites(day)
+        repository.changeFavorites(
+            day.apply {
+                isFavorite = !this.isFavorite
+            }
+        )
     }
 }
