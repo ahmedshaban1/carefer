@@ -15,14 +15,15 @@ Pl Assignment app is a small   application to demonstrate modern Android applica
 ## Tech stack & Open-source libraries
 
 - Minimum SDK level 24
-- [Kotlin](https://kotlinlang.org/)
-- [Coroutines](https://github.com/Kotlin/kotlinx.coroutines)
+- [Kotlin](https://kotlinlang.org/) A modern programming language that makes developers happier.
+- [Coroutines](https://github.com/Kotlin/kotlinx.coroutines) is a good for lightweight,fewer memory leaks,built-in cancellation support and Jetpack integration
 - [Flow](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/)
 - [StateFlow](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-state-flow/index.html)
 - [Hilt](https://developer.android.com/training/dependency-injection/hilt-android) for dependency injection.
-- [JetPack](https://developer.android.com/jetpack)
+- [JetPack](https://developer.android.com/jetpack) Jetpack is a suite of libraries to help developers follow best practices, reduce boilerplate code, and    write code that works consistently across Android versions and devices so that developers can focus on the code they care about.
 - [JetPack Compose](https://developer.android.com/jetpack/compose?gclid=Cj0KCQjwxIOXBhCrARIsAL1QFCYQrJjMxnW0gyK5bsPABpajsfMUF9lJtsYK2naZ6WI2NVFc3rd_nSUaAg07EALw_wcB&gclsrc=aw.ds) for UI implementation
 - [Mockk](https://mockk.io/) for unit testing
+- [Github actions](https://github.com/actions) for handling ci/cd work flows 
 
 - Architecture
   - MVI Architecture
