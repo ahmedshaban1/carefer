@@ -17,8 +17,8 @@ Pl Assignment app is a small   application to demonstrate modern Android applica
 - Minimum SDK level 24
 - [Kotlin](https://kotlinlang.org/) A modern programming language that makes developers happier.
 - [Coroutines](https://github.com/Kotlin/kotlinx.coroutines) is a good for lightweight,fewer memory leaks,built-in cancellation support and Jetpack integration
-- [Flow](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/)
-- [StateFlow](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-state-flow/index.html)
+- [Flow](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/) A suspending function asynchronously returns a single value, but how can we return multiple asynchronously computed values
+- [StateFlow](https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/-state-flow/index.html) A SharedFlow that represents a read-only state with a single updatable data value that emits updates to the value to its collectors.
 - [Hilt](https://developer.android.com/training/dependency-injection/hilt-android) for dependency injection.
 - [JetPack](https://developer.android.com/jetpack) Jetpack is a suite of libraries to help developers follow best practices, reduce boilerplate code, and    write code that works consistently across Android versions and devices so that developers can focus on the code they care about.
 - [JetPack Compose](https://developer.android.com/jetpack/compose?gclid=Cj0KCQjwxIOXBhCrARIsAL1QFCYQrJjMxnW0gyK5bsPABpajsfMUF9lJtsYK2naZ6WI2NVFc3rd_nSUaAg07EALw_wcB&gclsrc=aw.ds) for UI implementation
@@ -29,7 +29,7 @@ Pl Assignment app is a small   application to demonstrate modern Android applica
   - MVI Architecture
   - Repository pattern
   - Clean Architecture approach.
-- [Gradle KotlinDsl](https://docs.gradle.org/current/userguide/kotlin_dsl.html)
+- [Gradle KotlinDsl](https://docs.gradle.org/current/userguide/kotlin_dsl.html) Gradle’s Kotlin DSL provides an alternative syntax to the traditional Groovy DSL with an enhanced editing experience in supported IDEs
 - [Retrofit2 & OkHttp3](https://github.com/square/retrofit) - Construct the REST APIs.
 - [GSON](https://github.com/google/gson) - A Modern JSON library for Android.
 - [Ktlint](https://github.com/pinterest/ktlint)- An anti-bikeshedding Kotlin linter with a built-in
