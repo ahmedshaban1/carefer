@@ -17,7 +17,6 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 
-
 @OptIn(ExperimentalCoroutinesApi::class)
 class CompetitionRepositoryImplTest {
     private lateinit var sut: CompetitionRepositoryImpl
@@ -34,18 +33,17 @@ class CompetitionRepositoryImplTest {
         sut = CompetitionRepositoryImpl(remoteDataSource, localDataSource)
     }
 
-
     @Test
     fun `Given getCompetition, get competition success from remote success`() = runBlocking {
-        //arrange
+        // arrange
         coEvery {
             remoteDataSource.getCompetition()
         } returns competitionResponse
 
-        //act
+        // act
         val results = sut.getCompetition()
 
-        //assert
+        // assert
         coVerify {
             remoteDataSource.getCompetition()
         }
@@ -54,74 +52,70 @@ class CompetitionRepositoryImplTest {
 
     @Test
     fun `Given Local getCompetition, get all days success from local success`() = runBlocking {
-        //arrange
+        // arrange
         coEvery {
             localDataSource.getAll()
         } returns flow { emit(expectedList) }
 
-        //act
+        // act
         sut.getLocalCompetition(Filter.ALL).collect(collector)
 
-        //assert
+        // assert
         coVerify {
             collector.emit(expectedList)
         }
         coVerify(exactly = 1) {
             localDataSource.getAll()
         }
-
     }
 
     @Test
     fun `Given Local getCompetition, get favorites days success from local success`() = runBlocking {
-        //arrange
+        // arrange
         coEvery {
             localDataSource.getFavorites()
         } returns flow { emit(expectedList) }
 
-        //act
+        // act
         sut.getLocalCompetition(Filter.Favorites).collect(collector)
-        //assert
+        // assert
         coVerify {
             collector.emit(expectedList)
         }
         coVerify(exactly = 1) {
             localDataSource.getFavorites()
         }
-
     }
 
     @Test
     fun `Given changeFavorites, change favorite status local`() = runBlocking {
-        //arrange
+        // arrange
         val dayInput = dayMatches[0]
         coEvery {
             localDataSource.updateDayMatch(any())
         } returns Unit
-        //act
+        // act
         sut.changeFavorites(dayInput)
 
-        //assert
+        // assert
         coVerify(exactly = 1) {
             localDataSource.updateDayMatch(dayInput)
         }
-
     }
-
 
     @Test
     fun `Given save competition, save competition to local`() = runBlocking {
-        //arrange
+        // arrange
         coEvery {
             localDataSource.getDay(any())
         } returns null
         coEvery {
             localDataSource.insertDayMatch(any())
         } returns Unit
-        //act
+        // act
         sut.saveCompetition(dayMatches)
 
-        //assert
+        // assert
         coVerify(atLeast = 1) {
             localDataSource.getDay(any())
             localDataSource.insertDayMatch(any())
@@ -134,17 +128,17 @@ class CompetitionRepositoryImplTest {
     @Test
     fun `Given save competition, update competition to local`() = runBlocking {
         val day = dayMatches[0]
-        //arrange
+        // arrange
         coEvery {
             localDataSource.getDay(any())
         } returns day
         coEvery {
             localDataSource.updateDayMatch(any())
         } returns Unit
-        //act
+        // act
         sut.saveCompetition(dayMatches)
 
-        //assert
+        // assert
         coVerify(atLeast = 1) {
             localDataSource.getDay(any())
             localDataSource.updateDayMatch(any())
@@ -153,6 +147,4 @@ class CompetitionRepositoryImplTest {
             localDataSource.insertDayMatch(any())
         }
     }
-
-
 }
